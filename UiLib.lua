@@ -14,6 +14,7 @@ local textservice = game:GetService("TextService")
 local coregui = game:GetService("CoreGui")
 local httpservice = game:GetService("HttpService")
 
+
 local player = players.LocalPlayer
 local camera = game.Workspace.CurrentCamera
 
@@ -3693,3 +3694,8 @@ function library:CreateWindow(name, size, hidebutton)
 end
 
 return library
+
+
+local UserInputService = game:GetService("UserInputService")
+
+uis.MouseIconEnabled = true
