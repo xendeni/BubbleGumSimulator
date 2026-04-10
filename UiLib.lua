@@ -17,6 +17,11 @@ local httpservice = game:GetService("HttpService")
 
 local player = players.LocalPlayer
 local camera = game.Workspace.CurrentCamera
+local mouse = player:GetMouse()
+
+-- Ensure the mouse cursor is always visible
+local guiservice = game:GetService("GuiService")
+uis.MouseIconEnabled = true
 
 library.theme = {
     fontsize = 15,
@@ -285,6 +290,17 @@ function library:CreateWindow(name, size, hidebutton)
     uis.InputBegan:Connect(function(key)
         if key.KeyCode == window.hidebutton then
             window.Frame.Visible = not window.Frame.Visible
+            -- If cursor theme flag is set, restore mouse icon when UI is shown
+            if window.theme.cursor then
+                uis.MouseIconEnabled = true
+            end
+        end
+    end)
+
+    -- Enforce cursor visibility on every frame if cursor flag is true
+    runservice.RenderStepped:Connect(function()
+        if window.theme.cursor then
+            uis.MouseIconEnabled = true
         end
     end)
 
@@ -1870,7 +1886,7 @@ function library:CreateWindow(name, size, hidebutton)
                     slider:Set(slider.default)
     
                     function slider:Refresh()
-                        local mousePos = camera:WorldToViewportPoint(mouse.Hit.p)
+                        local mousePos = camera:WorldToViewportPoint(mouse.Hit.Position)
                         local percent = math.clamp(mousePos.X - slider.SlideBar.AbsolutePosition.X, 0, slider.Main.AbsoluteSize.X) / slider.Main.AbsoluteSize.X
                         local value = math.floor((slider.min + (slider.max - slider.min) * percent) * slider.decimals) / slider.decimals
                         value = math.clamp(value, slider.min, slider.max)
@@ -2224,7 +2240,7 @@ function library:CreateWindow(name, size, hidebutton)
                 end)
 
                 function slider:Refresh()
-                    local mousePos = camera:WorldToViewportPoint(mouse.Hit.p)
+                    local mousePos = camera:WorldToViewportPoint(mouse.Hit.Position)
                     local percent = math.clamp(mousePos.X - slider.SlideBar.AbsolutePosition.X, 0, slider.Main.AbsoluteSize.X) / slider.Main.AbsoluteSize.X
                     local value = math.floor((slider.min + (slider.max - slider.min) * percent) * slider.decimals) / slider.decimals
                     value = math.clamp(value, slider.min, slider.max)
@@ -3694,8 +3710,3 @@ function library:CreateWindow(name, size, hidebutton)
 end
 
 return library
-
-
-local UserInputService = game:GetService("UserInputService")
-
-uis.MouseIconEnabled = true
