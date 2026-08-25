@@ -11,13 +11,13 @@ the main file is ```esp.lua``` but if you want the sick ultra cool loading scree
 
 ## Features
 
--Auto-Pickups (For most worlds as I have since discontinued updating it)
--Pickup-All-Spawns (essentially a crashout...) 
--AutoBubble
--AutoHatchEggs
--FastHatch??? (works when you have the fasthatch effect in combo w this on)
--AutoDeletePets
--AutoDeleteHats
+1. Auto-Pickups (For most worlds as I have since discontinued updating it)
+2. Pickup-All-Spawns (essentially a crashout...) 
+3. AutoBubble
+4. AutoHatchEggs
+5. FastHatch??? (works when you have the fasthatch effect in combo w this on)
+6. AutoDeletePets
+7. AutoDeleteHats
 
 > sidenote: all pickups are TouchInterest not CFrame so you can hatch and collect your currency simultaneously
 
